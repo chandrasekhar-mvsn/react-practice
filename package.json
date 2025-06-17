@@ -1,0 +1,34 @@
+{
+  "name": "reacttraining",
+  "version": "1.0.0",
+  "description": "react training",
+  "main": "index.js",
+  "targets": {
+    "main": false
+  },
+  "scripts": {
+    "start": "parcel index.html --no-cache",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "keywords": [
+    "react",
+    "training"
+  ],
+  "author": "Chandra",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.15.2",
+    "parcel": "^2.15.2"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
+}
