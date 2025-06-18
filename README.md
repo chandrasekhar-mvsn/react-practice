@@ -611,5 +611,30 @@ const About = lazy(() => import("./components/About"));
     element: <Suspense fallback={<h1>Lazy Loading...</h1>}><About /></Suspense>,
   }
 ```
+# Styling Components
+### Various ways
+- CSS
+- SCSS & Sass
+- Styled Components
+- MUI React
+- Bootstrap
+- Tailwind
+- Chakra UI
+- Ant design
+### Using Tailwind CSS
+# Higher Order Components
+- Higher-Order Components (HOCs) are an advanced pattern in React for reusing component logic.
+- 🚀 Definition:
+A Higher-Order Component (HOC) is a function that takes a component and returns a new component with added functionality.
+```const EnhancedComponent = higherOrderComponent(WrappedComponent);
+```
+- Higher order functions are pure functions
+### React Application has 2 layers
+1. UI Layer
+2. Data Layer
+- UI Layer is powered by data layer
+- Data layer consists of state, props, local variables etc..
+- Controlled & Uncontrolled component
+- lifting state up to control a component
 
 

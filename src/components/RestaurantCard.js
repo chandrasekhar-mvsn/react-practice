@@ -1,7 +1,7 @@
 import {CID_URL} from "../../utils/constants";
 import { useNavigate } from "react-router";
 
-const RestarentCard = ({
+const RestaurantCard = ({
   name,
   cuisines,
   cloudinaryImageId,
@@ -22,4 +22,14 @@ const RestarentCard = ({
   );
 };
 
-export default RestarentCard;
+export const withPromotedLabel = (WrappedComponent) => {
+  return (props) => {
+    return (
+      <div className="promoted-label">
+        <WrappedComponent {...props} />
+        <span className="discount-label">{props.discountTag}</span>
+      </div>
+    );
+  }
+};
+export default RestaurantCard;

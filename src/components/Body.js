@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import RestarentCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 // import resData from "../../utils/mockdata";
 // import "./../app.css";
@@ -13,6 +13,7 @@ const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const PromotedRestaurantCard = withPromotedLabel(RestaurantCard);
   useEffect(() => {
     // This is a side effect, like fetching data from an API
     // console.log("Component mounted or updated");
@@ -79,7 +80,18 @@ const Body = () => {
         {filteredList &&
           filteredList?.length > 0 ? (
           filteredList?.map((restaurant) => (
-            <RestarentCard
+            restaurant.info.aggregatedDiscountInfoV3?.discountTag ? (
+              <PromotedRestaurantCard
+                key={restaurant.info.id}
+                name={restaurant.info.name}
+                cuisines={restaurant.info.cuisines}
+                cloudinaryImageId={restaurant.info.cloudinaryImageId}
+                lastMileTravelString={restaurant.info.sla.lastMileTravelString}
+                resId={restaurant.info.id}
+                discountTag={restaurant.info.aggregatedDiscountInfoV3.discountTag}
+              />
+            ) : (
+            <RestaurantCard
               key={restaurant.info.id}
               name={restaurant.info.name}
               cuisines={restaurant.info.cuisines}
@@ -87,6 +99,7 @@ const Body = () => {
               lastMileTravelString={restaurant.info.sla.lastMileTravelString}
               resId={restaurant.info.id}
             />
+            )
           ))) : (
             <Shimmer />
           )}

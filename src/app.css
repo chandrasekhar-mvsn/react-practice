@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* app.css */
 
 body {
@@ -104,7 +106,7 @@ body {
 }
 
 .restaurant-card {
-  background: #f0f0f0;
+  background: #ffffff00;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   padding: 16px;
@@ -207,4 +209,24 @@ body {
   color: #ffffff;
   background-color: #b91c1c;
   justify-content: center;
+}
+
+.promoted-label {
+  position: relative;
+  display: flex;
+}
+
+.discount-label {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: #00205b;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  pointer-events: none;
 }
