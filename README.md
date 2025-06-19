@@ -636,5 +636,54 @@ A Higher-Order Component (HOC) is a function that takes a component and returns 
 - Data layer consists of state, props, local variables etc..
 - Controlled & Uncontrolled component
 - lifting state up to control a component
+### Props Drilling
+- Props drilling in React refers to the process of passing data (props) from a parent component to a deeply nested child component by going through one or more intermediate components that do not actually need the data themselves, but simply pass it down.
+### 🔍 Example:
+```
+function App() {
+  const user = { name: "Chandra" };
+  return <Parent user={user} />;
+}
 
+function Parent({ user }) {
+  return <Child user={user} />;
+}
 
+function Child({ user }) {
+  return <GrandChild user={user} />;
+}
+
+function GrandChild({ user }) {
+  return <p>Hello, {user.name}</p>;
+}
+
+```
+In this example:
+- App passes user to Parent.
+- Parent passes user to Child.
+- Child passes user to GrandChild.
+- Only GrandChild needs the user prop, but each component in the tree has to handle it. This is props drilling.
+### 🚫 Problems with Props Drilling:
+- Makes the code harder to maintain.
+- Intermediate components are burdened with props they don't use.
+- Not scalable for large component trees.
+### ✅ Solutions to Avoid Props Drilling:
+1. React Context API – Share data globally without drilling:
+```
+const UserContext = React.createContext();
+
+function App() {
+  const user = { name: "Chandra" };
+  return (
+    <UserContext.Provider value={user}>
+      <Parent />
+    </UserContext.Provider>
+  );
+}
+
+function GrandChild() {
+  const user = React.useContext(UserContext);
+  return <p>Hello, {user.name}</p>;
+}
+```
+2. State Management Libraries – Redux, Zustand, Recoil, etc.

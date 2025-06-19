@@ -87,6 +87,7 @@ const Body = () => {
                 cuisines={restaurant.info.cuisines}
                 cloudinaryImageId={restaurant.info.cloudinaryImageId}
                 lastMileTravelString={restaurant.info.sla.lastMileTravelString}
+                deliveryTime={restaurant.info.sla.slaString}
                 resId={restaurant.info.id}
                 discountTag={restaurant.info.aggregatedDiscountInfoV3.discountTag}
               />
@@ -97,6 +98,7 @@ const Body = () => {
               cuisines={restaurant.info.cuisines}
               cloudinaryImageId={restaurant.info.cloudinaryImageId}
               lastMileTravelString={restaurant.info.sla.lastMileTravelString}
+              deliveryTime={restaurant.info.sla.slaString}
               resId={restaurant.info.id}
             />
             )

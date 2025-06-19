@@ -6,6 +6,7 @@ const RestaurantCard = ({
   cuisines,
   cloudinaryImageId,
   lastMileTravelString,
+  deliveryTime,
   resId
 }) => {
   const navigate = useNavigate();
@@ -15,9 +16,12 @@ const RestaurantCard = ({
         src={CID_URL+cloudinaryImageId}
         alt={name}
       />
-      <h3>{name}</h3>
-      <p>{cuisines.join(", ")}</p>
-      <p>Delivery Time: {lastMileTravelString}</p>
+      <div className="card-content">
+        <h3>{name}</h3>
+        <p>{cuisines.join(", ")}</p>
+        <p>Delivery Time: {deliveryTime}</p>
+        <p>Distance: {lastMileTravelString}</p>
+      </div>
     </div>
   );
 };

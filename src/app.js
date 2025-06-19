@@ -1,5 +1,5 @@
 // import React from "react";
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import ReactDOM from "react-dom/client";
 import "./app.css";
 import Header from "./components/Header";
@@ -9,6 +9,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
 // import About from "./components/About";
 import Errorpage from "./components/Errorpage";
 import RestaurantMenu from "./components/RestaurantMenu";
+import UserContext from '../utils/UserContext';
 // const app = React.createElement('div', null, 'Hello, React!');
 // console.log(app);
 // const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,13 +19,24 @@ import RestaurantMenu from "./components/RestaurantMenu";
 const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState("Guest");
+  useEffect(() => {
+    // Simulating a user login after 2 seconds
+    const timer = setTimeout(() => {
+      setUserName("Guest");
+    }, 2000);
+    return () => clearTimeout(timer); // Cleanup the timer on unmount
+  }, []);
+
   return (
+   <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>     
     <div className="app-layout">
       <Header />
       <Outlet />
       {/* Outlet is a placeholder for the child routes */}
       <Footer />
     </div>
+    </UserContext.Provider>
   );
 };
 // Create a browser router
