@@ -1,5 +1,5 @@
 // import React from "react";
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./app.css";
 import Header from "./components/Header";
@@ -9,7 +9,11 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
 // import About from "./components/About";
 import Errorpage from "./components/Errorpage";
 import RestaurantMenu from "./components/RestaurantMenu";
-import UserContext from '../utils/UserContext';
+import UserContext from "../utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./redux/appStore";
+import Cart from "./components/cart";
+
 // const app = React.createElement('div', null, 'Hello, React!');
 // console.log(app);
 // const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -29,14 +33,17 @@ const AppLayout = () => {
   }, []);
 
   return (
-   <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>     
-    <div className="app-layout">
-      <Header />
-      <Outlet />
-      {/* Outlet is a placeholder for the child routes */}
-      <Footer />
-    </div>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      {/* Providing the Redux store to the application */}
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app-layout">
+          <Header />
+          <Outlet />
+          {/* Outlet is a placeholder for the child routes */}
+          <Footer />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 // Create a browser router
@@ -52,12 +59,20 @@ const appRouter = createBrowserRouter([
       }, // / (index route)
       {
         path: "/about",
-        element: <Suspense fallback={<h1>Lazy Loading...</h1>}><About /></Suspense>,
+        element: (
+          <Suspense fallback={<h1>Lazy Loading...</h1>}>
+            <About />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "restaurant/:resId",
         element: <RestaurantMenu />,
-      }
+      },
     ],
   },
 ]);

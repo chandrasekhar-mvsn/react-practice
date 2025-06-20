@@ -1,11 +1,7 @@
-import { CID_URL } from "../../utils/constants";
+import ItemList from "./ItemList";
 const RestaurantCategory = ({ categoryInfo }) => {
   const { itemCards, title } = categoryInfo || {};
-  // Helper function to convert paise to rupees
-  const toRupees = (amount) => {
-    if (!amount) return "";
-    return (amount / 100).toFixed(2);
-  };
+
   return (
     // Accordion component to display restaurant categories
     <div className="w-full mx-auto bg-white shadow-md">
@@ -29,37 +25,10 @@ const RestaurantCategory = ({ categoryInfo }) => {
             </svg>
           </span>
         </summary>
-        {(itemCards || []).map((section, idx) => {
+        {(itemCards || []).map((section, idx) => {      
           const { category, price, description, id, name, imageId } =
             section?.card?.info || {};
-
-          return (
-            <ul
-              className="px-4 py-2 bg-white rounded-b-xl border-t"
-              key={id || idx}
-            >
-              <li className="py-2 border-b last:border-b-0">
-                <div className="w-90 font-medium text-gray-800 flex items-center justify-between">
-                  {name || ""}
-                </div>
-                <div className="flex items-center justify-between text-gray-600">
-                  <div className="w-90 text-gray-500 text-sm mt-1">
-                    {description || ""}
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <img
-                      className="restaurant-image"
-                      src={`${CID_URL}${imageId}`}
-                      alt={name}
-                    />
-                    <span className="text-green-600 font-semibold">
-                      {price ? `₹${toRupees(price)}` : ""}
-                    </span>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          );
+          return <ItemList itemInfo={section?.card?.info || {}} key={idx + id}/>;
         })}
       </details>
     </div>

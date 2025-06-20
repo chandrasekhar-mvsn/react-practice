@@ -3,11 +3,15 @@ import { Link } from 'react-router';
 import useOnlineStatus from "../../utils/useOnlineStatue";
 import { LOGO_URL } from "../../utils/constants";
 import UserContext from "../../utils/UserContext";
+import {useSelector } from "react-redux";
+
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const isOnline = useOnlineStatus();
   const { loggedInUser, setUserName } = useContext(UserContext);
+  // Using useSelector to access the cart items from the Redux store(Subscribe to the Redux store to get the cart items)
+  const cartItems = useSelector((store) => store.cart.cartItems);
   useEffect(() => {
     return () => {
       // Cleanup code if needed
@@ -15,7 +19,7 @@ const Header = () => {
   }, []);
   return (
     <>
-    <div className="header">
+    <div className="header sticky top-0 z-50 bg-white shadow">
       <div className="logo">
         <img src={LOGO_URL} alt="React Logo" />
       </div>
@@ -35,6 +39,13 @@ const Header = () => {
           </li>
           <li>
             <Link to="/services">Services</Link>
+          </li>
+          <li>
+            <Link to="/cart">
+              <span style={{cursor: "pointer", fontWeight:"bold"}} className="cart">
+                🛒 ({cartItems.length})
+              </span>
+            </Link>
           </li>
           <li>
             {/* <Link to="/login">{btnName}</Link> */}

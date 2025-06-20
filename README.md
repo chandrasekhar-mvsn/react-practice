@@ -687,3 +687,110 @@ function GrandChild() {
 }
 ```
 2. State Management Libraries – Redux, Zustand, Recoil, etc.
+# Redux
+- Redux is not mandatory in case of small or medium applications, use wisely only when it is required.
+- React-Redux library
+- Redux Toolkit RTK
+### Redux Toolkit 
+- Install
+``` npm install @reduxjs/toolkit```
+```npm install react-redux```
+- Connect our store to our app
+- Slice
+- dispatch
+- Selector
+### ✅ Common Redux Folder Structure
+``` my-app/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── redux/                <-- 🟢 Add your Redux logic here
+│   │   ├── store.js          <-- Creates and exports the Redux store
+│   │   ├── rootReducer.js    <-- Combines all reducers
+│   │   ├── slices/           <-- For Redux Toolkit slices (recommended)
+│   │   │   ├── userSlice.js
+│   │   │   └── productSlice.js
+│   │   └── actions/          <-- (If not using Toolkit) For action creators
+│   ├── App.js
+│   └── index.js
+```
+- or for a React project using Redux Toolkit (RTK) and React-Redux, designed for scalability, maintainability, and clear separation of concerns:
+### ✅ Top-Level Structure
+``` 
+/my-app
+│
+├── public/                 # Static assets
+├── src/
+│   ├── assets/             # Images, fonts, global styles
+│   ├── components/         # Shared, reusable components (UI, widgets)
+│   ├── features/           # RTK “slices” grouped by domain
+│   ├── pages/              # Page-level components (routes/screens)
+│   ├── app/                # Store config, root reducers, global setup
+│   ├── hooks/              # Custom hooks (e.g., useAuth)
+│   ├── utils/              # Utility functions and helpers
+│   ├── services/           # API calls (can use RTK Query here)
+│   ├── constants/          # App-wide constants and enums
+│   ├── types/              # TypeScript types or interfaces (if TS)
+│   └── index.js            # Entry point
+│
+├── .env
+├── .gitignore
+├── package.json
+└── README.md
+```
+### 📦 Detailed Breakdown
+``` 
+1. /app
+  ├── store.js            # Configure store with middleware and reducers
+  └── rootReducer.js      # Combine reducers (optional if using slices directly)
+2. src/features/
+/features
+  ├── auth/
+  │   ├── authSlice.js
+  │   ├── authAPI.js
+  │   └── authSelectors.js
+  ├── user/
+  │   ├── userSlice.js
+  │   ├── userAPI.js
+  │   └── userSelectors.js
+```
+- Always subscribe to a small/specific portion of the store for performance optimization.
+- you can mutate the Redux state when using Redux Toolkit (RTK) — and it is the recommended way within RTK slices because RTK uses Immer under the hood.
+### ✅ In Redux Toolkit (RTK), you can safely write:
+```
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: { value: 0 },
+  reducers: {
+    increment(state) {
+      // This looks like a mutation
+      state.value += 1;
+    },
+    decrement(state) {
+      state.value -= 1;
+    }
+  }
+});
+```
+###
+- Although it looks like you're mutating the state, Immer internally converts it into immutable updates.
+### ❌ In traditional Redux (without RTK or Immer), you cannot mutate state directly. You must return a new copy:
+```
+// Traditional Redux reducer (immutability required)
+function counterReducer(state = { value: 0 }, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { ...state, value: state.value + 1 }; // must return a new object
+    default:
+      return state;
+  }
+}
+
+```
+### ⚠️ Outside of reducers (e.g., in components or thunks), do not mutate the Redux state directly. Access it via selectors only.
+### Summary
+| Context         | Mutation Allowed? | Explanation                                        |
+| --------------- | ----------------- | -------------------------------------------------- |
+| RTK Reducer     | ✅ Yes             | Uses Immer internally to safely mutate             |
+| Vanilla Redux   | ❌ No              | You must return new state objects manually         |
+| Component/Thunk | ❌ No              | Never mutate store state directly outside reducers |

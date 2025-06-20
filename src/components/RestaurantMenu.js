@@ -13,7 +13,7 @@ const RestaurantMenu = () => {
         <div className="shimmer-info">
           <div className="shimmer-title shimmer"></div>
           <div className="shimmer-cuisines shimmer">
-           <div className="shimmer-cost shimmer"></div>
+            <div className="shimmer-cost shimmer"></div>
           </div>
           <div className="shimmer-image shimmer"></div>
         </div>
@@ -31,10 +31,12 @@ const RestaurantMenu = () => {
   }
   const info = restaurantData?.cards?.[2]?.card?.card?.info || {};
   const { name, cuisines, cloudinaryImageId, costForTwoMessage } = info;
-  const  categories  =
+  const categories =
     restaurantData.cards[4].groupedCard.cardGroupMap.REGULAR.cards?.filter(
-      (card) => card.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
-      ) || [];
+      (card) =>
+        card.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    ) || [];
 
   return (
     <div className="restaurant-menu-list">
@@ -54,34 +56,14 @@ const RestaurantMenu = () => {
       </div>
       {categories && categories.length > 0 && (
         <div className="restaurant-categories">
-          <h3 style={{color: 'grey'}}>Categories</h3>
+          <h3 style={{ color: "grey" }}>Categories</h3>
           <ul className="category-list">
             {categories.map((item, index) => {
               const { itemCards } = item.card.card;
               return (
                 <div key={index} className="category-item">
-                  {/* <h3>Menu</h3> */}
                   <div className="restaurant-menu-sections">
-                    {/* {(itemCards || []).map((section, idx) => {
-                      const { id } = section?.card?.info || {}; */}
-                      {/* return ( */}
-                        {/* <div key={idx+id} className="menu-section">
-                          <h4 className="menu-category">{category || ""}</h4>
-                          <ul className="menu-items">
-                            <li className="menu-item">
-                              <div className="item-title">
-                                {name || ""}{" "}
-                                <span className="item-price">
-                                  {price ? `₹${price}` : ""}
-                                </span>
-                              </div>
-                              <div className="item-description">{description || ""}</div>
-                            </li>
-                          </ul>
-                        </div> */ }                     
-                        <RestaurantCategory categoryInfo={item.card.card} />
-                      {/* ); */}
-                    {/* })} */}
+                    <RestaurantCategory categoryInfo={item.card.card} />
                   </div>
                 </div>
               );
