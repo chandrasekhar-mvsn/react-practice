@@ -794,3 +794,6 @@ function counterReducer(state = { value: 0 }, action) {
 | RTK Reducer     | ✅ Yes             | Uses Immer internally to safely mutate             |
 | Vanilla Redux   | ❌ No              | You must return new state objects manually         |
 | Component/Thunk | ❌ No              | Never mutate store state directly outside reducers |
+
+### Middleware & Thunks in older version
+### In Newer version we have RTK Query 
