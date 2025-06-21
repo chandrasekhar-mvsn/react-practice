@@ -48,7 +48,7 @@ const Body = () => {
   return (
     <div className="body">
       <div className="search-bar">
-        <input type="text" value={searchText}onChange={(e) => {setSearchText(e.target.value)}}placeholder="Search Restaurants..." />
+        <input type="text" value={searchText} onChange={(e) => {setSearchText(e.target.value)}}placeholder="Search Restaurants..." />
         <button className="search-btn" onClick={()=> {
           const filteredList = restaurantList.filter((restaurant) => {
             return restaurant.info.name.toLowerCase().includes(searchText.toLowerCase());

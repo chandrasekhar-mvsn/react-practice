@@ -1,5 +1,5 @@
 // import React from "react";
-import { lazy, Suspense, useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./app.css";
 import Header from "./components/Header";
@@ -13,6 +13,7 @@ import UserContext from "../utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./redux/appStore";
 import Cart from "./components/cart";
+import Demo from "./components/Demo";
 
 // const app = React.createElement('div', null, 'Hello, React!');
 // console.log(app);
@@ -70,6 +71,10 @@ const appRouter = createBrowserRouter([
         element: <Cart />,
       },
       {
+        path: "/demo",
+        element: <Demo />,
+      },
+      {
         path: "restaurant/:resId",
         element: <RestaurantMenu />,
       },
@@ -80,4 +85,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // Render the AppLayout component with out Router
 // root.render(<AppLayout />);
 // Render the AppLayout component with Router
-root.render(<RouterProvider router={appRouter} />);
+root.render(
+  <React.StrictMode>
+    <RouterProvider router={appRouter} />
+  </React.StrictMode>
+);

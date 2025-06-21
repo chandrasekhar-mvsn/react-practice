@@ -796,4 +796,24 @@ function counterReducer(state = { value: 0 }, action) {
 | Component/Thunk | ❌ No              | Never mutate store state directly outside reducers |
 
 ### Middleware & Thunks in older version
-### In Newer version we have RTK Query 
+### In Newer version we have RTK Query
+
+### In Strict mode component rerenders twice in dev mode only to make sure it renders properly or not
+
+## `useMemo`, `useCallback`, and `useRef`:
+### useMemo
+- useMemo is a React Hook that lets you cache the result of a calculation between re-renders.
+```const cachedValue = useMemo(calculateValue, dependencies)```
+###  Common use cases
+- Skipping expensive recalculations
+- Skipping unnecessary re-rendering of components
+- Preventing an effect from firing too often
+- Memoizing a dependency of another Hook
+- Memoizing a function to avoid unnecessary re-creations
+### useRef
+- useRef is a React Hook that lets you reference a value that’s not needed for rendering.
+- useRef gives you a mutable container (.current) that:
+* Persists across renders
+* Doesn't cause re-renders when updated
+- ``` const myRef = useRef(initialValue);```
+
