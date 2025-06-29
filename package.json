@@ -9,7 +9,15 @@
   "scripts": {
     "start": "parcel index.html --no-cache",
     "build": "parcel build index.html",
-    "test": "jest"
+    "test": "jest",
+    "watch-test": "jest --watch",
+    "test-coverage": "jest --coverage",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format-check": "prettier --check .",
+    "prettier": "prettier --write .",
+    "prettier-check": "prettier --check ."
   },
   "keywords": [
     "react",
@@ -18,7 +26,16 @@
   "author": "Chandra",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
     "@parcel/transformer-sass": "^2.15.2",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "babel-jest": "^30.0.2",
+    "jest": "^30.0.2",
+    "jest-environment-jsdom": "^30.0.2",
     "parcel": "^2.15.2"
   },
   "dependencies": {

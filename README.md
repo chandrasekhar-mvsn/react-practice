@@ -1,4 +1,5 @@
 # Intro
+
 ### package.json
 
 package.json file is a configuration for npm
@@ -493,6 +494,7 @@ const router = createBrowserRouter([
 - Never use `<a>` tag while navigation because whole page will get refresh
 - Use Link component instead
 - Link is a wrapper over anchor tag, React Router DOM will keep a track of this Link.
+
 ### 🔍 Difference between `<a>` and `<Link />` in React (especially with React Router)
 
 | Feature                 | `<a>` (HTML Anchor)        | `<Link />` (React Router)             |
@@ -511,25 +513,34 @@ If you want to style the active route, use:
 ```
 <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>About</NavLink>
 ```
+
 ### Types of Routing
+
 1. Client side Routing
 2. Server side Routing(get html from server)
 
 ### 🔀 Dynamic Routes with Params in React Router
+
 - React Router supports dynamic routing with URL parameters, allowing you to handle paths like:
+
 ```
 /users/:userId
 /products/:productId
 ```
+
 - These are called route params and are super useful for rendering details pages, profiles, etc.
+
 ### 📌 1. Define a Dynamic Route
+
 ```
 {
     path: '/users/:userId',
     element: <UserPage />,
   }
 ```
+
 ### 📌 2. Access the Param with useParams()
+
 ```
 // UserPage.jsx
 import { useParams } from 'react-router-dom';
@@ -544,11 +555,15 @@ export default function UserPage() {
   );
 }
 ```
+
 ### 🧠 Tips:
+
 - Param values are always strings
 - Use multiple params like /users/:userId/posts/:postId
 - Combine with loader() if you want to fetch data based on userId
+
 ### ⚡ Bonus: Fetch Data in loader()
+
 ```
 {
   path: '/users/:userId',
@@ -559,23 +574,27 @@ export default function UserPage() {
   }
 }
 ```
+
 - Then access it in the component using useLoaderData().
+
 ### GraphQL
+
 - GraphQL helps us in dealing with over fetching of data. so load only the required data.
-
-
 
 ### Shortcuts/tricks
 
 - Type rafce in vscode to generate basic structure of component.
 
 # 📐 Single Responsibility Principle (SRP) in React
+
 - SRP (Single Responsibility Principle) is one of the SOLID principles of software design. It states:
 
 - ✅ “A component (or module) should have only one reason to change.”
 
 - In React, this means each component should do one thing well — ideally managing one piece of UI logic or behavior.
+
 ### 🔍 Why SRP Matters in React
+
 ✅ Easier to test
 
 ✅ Easier to maintain
@@ -585,34 +604,44 @@ export default function UserPage() {
 ✅ Prevents bloated components
 
 ✅ Enhances readability
+
 ### 🧠 Tips
+
 - Break components when they exceed ~100 lines or handle multiple concerns
 - Extract hooks too (useFetchUsers, useForm)
 - Don’t be afraid to create many small components
 
 ### Custom React Hooks
+
 - Hooks are like a utility functions.
 - we can abstract some responsibility from a component and place it inside a hooks so that our component and hook becomes more modular and readable.
+
 ### Optimization
+
 - Chunking
 - Lazy Loading
 - Code Splitting
 - Dynamic Bundling
 - On Demand loading
 - dynamic import
+
 ```
 import { lazy, Suspense } from 'react';
 // Lazy loading the About component to optimize performance
 const About = lazy(() => import("./components/About"));
 ```
+
 ```
  {
     path: "/about",
     element: <Suspense fallback={<h1>Lazy Loading...</h1>}><About /></Suspense>,
   }
 ```
+
 # Styling Components
+
 ### Various ways
+
 - CSS
 - SCSS & Sass
 - Styled Components
@@ -621,24 +650,37 @@ const About = lazy(() => import("./components/About"));
 - Tailwind
 - Chakra UI
 - Ant design
+
 ### Using Tailwind CSS
+
 # Higher Order Components
+
 - Higher-Order Components (HOCs) are an advanced pattern in React for reusing component logic.
 - 🚀 Definition:
-A Higher-Order Component (HOC) is a function that takes a component and returns a new component with added functionality.
+  A Higher-Order Component (HOC) is a function that takes a component and returns a new component with added functionality.
+
 ```const EnhancedComponent = higherOrderComponent(WrappedComponent);
+
 ```
+
 - Higher order functions are pure functions
+
 ### React Application has 2 layers
+
 1. UI Layer
 2. Data Layer
+
 - UI Layer is powered by data layer
 - Data layer consists of state, props, local variables etc..
 - Controlled & Uncontrolled component
 - lifting state up to control a component
+
 ### Props Drilling
+
 - Props drilling in React refers to the process of passing data (props) from a parent component to a deeply nested child component by going through one or more intermediate components that do not actually need the data themselves, but simply pass it down.
+
 ### 🔍 Example:
+
 ```
 function App() {
   const user = { name: "Chandra" };
@@ -658,17 +700,24 @@ function GrandChild({ user }) {
 }
 
 ```
+
 In this example:
+
 - App passes user to Parent.
 - Parent passes user to Child.
 - Child passes user to GrandChild.
 - Only GrandChild needs the user prop, but each component in the tree has to handle it. This is props drilling.
+
 ### 🚫 Problems with Props Drilling:
+
 - Makes the code harder to maintain.
 - Intermediate components are burdened with props they don't use.
 - Not scalable for large component trees.
+
 ### ✅ Solutions to Avoid Props Drilling:
+
 1. React Context API – Share data globally without drilling:
+
 ```
 const UserContext = React.createContext();
 
@@ -686,21 +735,28 @@ function GrandChild() {
   return <p>Hello, {user.name}</p>;
 }
 ```
+
 2. State Management Libraries – Redux, Zustand, Recoil, etc.
+
 # Redux
+
 - Redux is not mandatory in case of small or medium applications, use wisely only when it is required.
 - React-Redux library
 - Redux Toolkit RTK
-### Redux Toolkit 
+
+### Redux Toolkit
+
 - Install
-``` npm install @reduxjs/toolkit```
-```npm install react-redux```
+  ` npm install @reduxjs/toolkit`
+  `npm install react-redux`
 - Connect our store to our app
 - Slice
 - dispatch
 - Selector
+
 ### ✅ Common Redux Folder Structure
-``` my-app/
+
+```my-app/
 ├── src/
 │   ├── components/
 │   ├── pages/
@@ -714,9 +770,12 @@ function GrandChild() {
 │   ├── App.js
 │   └── index.js
 ```
+
 - or for a React project using Redux Toolkit (RTK) and React-Redux, designed for scalability, maintainability, and clear separation of concerns:
+
 ### ✅ Top-Level Structure
-``` 
+
+```
 /my-app
 │
 ├── public/                 # Static assets
@@ -738,8 +797,10 @@ function GrandChild() {
 ├── package.json
 └── README.md
 ```
+
 ### 📦 Detailed Breakdown
-``` 
+
+```
 1. /app
   ├── store.js            # Configure store with middleware and reducers
   └── rootReducer.js      # Combine reducers (optional if using slices directly)
@@ -754,9 +815,12 @@ function GrandChild() {
   │   ├── userAPI.js
   │   └── userSelectors.js
 ```
+
 - Always subscribe to a small/specific portion of the store for performance optimization.
 - you can mutate the Redux state when using Redux Toolkit (RTK) — and it is the recommended way within RTK slices because RTK uses Immer under the hood.
+
 ### ✅ In Redux Toolkit (RTK), you can safely write:
+
 ```
 const counterSlice = createSlice({
   name: 'counter',
@@ -772,9 +836,13 @@ const counterSlice = createSlice({
   }
 });
 ```
+
 ###
+
 - Although it looks like you're mutating the state, Immer internally converts it into immutable updates.
+
 ### ❌ In traditional Redux (without RTK or Immer), you cannot mutate state directly. You must return a new copy:
+
 ```
 // Traditional Redux reducer (immutability required)
 function counterReducer(state = { value: 0 }, action) {
@@ -787,33 +855,192 @@ function counterReducer(state = { value: 0 }, action) {
 }
 
 ```
+
 ### ⚠️ Outside of reducers (e.g., in components or thunks), do not mutate the Redux state directly. Access it via selectors only.
+
 ### Summary
+
 | Context         | Mutation Allowed? | Explanation                                        |
 | --------------- | ----------------- | -------------------------------------------------- |
-| RTK Reducer     | ✅ Yes             | Uses Immer internally to safely mutate             |
-| Vanilla Redux   | ❌ No              | You must return new state objects manually         |
-| Component/Thunk | ❌ No              | Never mutate store state directly outside reducers |
+| RTK Reducer     | ✅ Yes            | Uses Immer internally to safely mutate             |
+| Vanilla Redux   | ❌ No             | You must return new state objects manually         |
+| Component/Thunk | ❌ No             | Never mutate store state directly outside reducers |
 
 ### Middleware & Thunks in older version
+
 ### In Newer version we have RTK Query
 
 ### In Strict mode component rerenders twice in dev mode only to make sure it renders properly or not
 
 ## `useMemo`, `useCallback`, and `useRef`:
+
 ### useMemo
+
 - useMemo is a React Hook that lets you cache the result of a calculation between re-renders.
-```const cachedValue = useMemo(calculateValue, dependencies)```
-###  Common use cases
+  `const cachedValue = useMemo(calculateValue, dependencies)`
+
+### Common use cases
+
 - Skipping expensive recalculations
 - Skipping unnecessary re-rendering of components
 - Preventing an effect from firing too often
 - Memoizing a dependency of another Hook
 - Memoizing a function to avoid unnecessary re-creations
+
 ### useRef
+
 - useRef is a React Hook that lets you reference a value that’s not needed for rendering.
 - useRef gives you a mutable container (.current) that:
+
 * Persists across renders
 * Doesn't cause re-renders when updated
-- ``` const myRef = useRef(initialValue);```
 
+- ` const myRef = useRef(initialValue);`
+
+## React Testing
+
+### Types of testing
+
+- By Developers
+
+* Unit testing - testing one unit or component in isolation
+* Integration testing - testing where multiple components which are involved and communicating to each other.
+
+- By QA Automation
+
+* End to End Testing E2E Testing - testing user flow across application by using some tools like Cyprus, puppeteer, Selenium etc...
+
+### Libraries used for Developer Testing
+
+- React Testing Library - React Testing Library builds on top of DOM Testing Library by adding APIs for working with React components.
+- Behind the scenes React Testing Library uses Jest Framework
+
+### Install React testing library
+
+`npm install --save-dev @testing-library/react @testing-library/dom`
+
+### Install Jest
+
+`npm install --save-dev jest`
+
+### Install Babel dependencies
+
+`npm install --save-dev babel-jest @babel/core @babel/preset-env`
+
+### Configure Babel
+
+### Configure parcel config file to disable default babel transpilation
+
+### Setup Jest Configuration
+
+`npx jest init`
+new
+`npm init jest@latest`
+
+### Install jsdom
+
+- Install "@babel/preset-react" - to make JSX work in test case
+- Include "@babel/preset-react" inside my babel config
+
+### Install "@testing-library/jest-dom"
+
+### test()- alias "it()" anything we can use.
+
+### describe() - to group test cases
+
+### The `act()` function in React Testing is used to ensure that all updates related to a component have been processed before making assertions. It's especially important when you're testing state updates, effects, or asynchronous behavior.
+
+### ✅ Definition (from React docs)
+
+- act() is a helper function from React DOM Test Utils or React Testing Library that ensures all updates related to rendering and effects are flushed before you assert on the DOM.
+
+### 📦 act() is imported from:
+
+- For general React testing:
+  `import { act } from 'react-dom/test-utils';`
+- With React Testing Library (preferred):
+  You usually don’t need to import it directly—RTL wraps most updates in act() for you.
+
+### 🧠 Why do we need act()?
+
+- React batches updates (like setState, useEffect, etc.). If you test before these updates finish, you’ll get warnings or wrong assertions.
+
+### ✅ Example 1: Without act()
+
+```
+import { render } from '@testing-library/react';
+import MyComponent from './MyComponent';
+
+test('updates on click', () => {
+  const { getByText } = render(<MyComponent />);
+  fireEvent.click(getByText('Increment'));  // This triggers a state change
+
+  // ⚠️ May get a warning if state updates aren't flushed before this
+  expect(getByText('Count: 1')).toBeInTheDocument();
+});
+```
+
+### ✅ Example 2: With act() explicitly
+
+```
+import { render, fireEvent } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
+import MyComponent from './MyComponent';
+
+test('updates on click', () => {
+  const { getByText } = render(<MyComponent />);
+
+  act(() => {
+    fireEvent.click(getByText('Increment'));
+  });
+
+  expect(getByText('Count: 1')).toBeInTheDocument();
+});
+
+```
+
+### ✅ When you SHOULD use act() explicitly
+
+- Use act() manually when:
+
+- You're testing custom hooks
+
+- You're not using render/fireEvent from RTL (e.g., raw ReactDOM)
+
+- You're writing async code like setTimeout, fetch, or Promises
+
+### 🔁 Async Example:
+
+```
+await act(async () => {
+  await someAsyncOperation(); // like API call or setTimeout
+});
+```
+### 🔥 Summary
+| Use Case                          | Use `act()`?      |
+| --------------------------------- | ----------------- |
+| Simple render + user events (RTL) | ❌ Usually not     |
+| Custom hooks                      | ✅ Yes             |
+| Async code (fetch, timeout)       | ✅ Yes (async act) |
+| Outside RTL (ReactDOM.render)     | ✅ Yes             |
+
+
+### In testing (especially with Jest, commonly used in React testing), the beforeAll, beforeEach, afterAll, and afterEach functions are setup and teardown hooks. They help prepare or clean up the environment before or after your tests run.
+
+### 🧪 Test Lifecycle Hooks
+
+| Hook         | Runs When                                 |
+| ------------ | ----------------------------------------- |
+| `beforeAll`  | **Once before** all tests in a file/suite |
+| `beforeEach` | **Before every** test                     |
+| `afterEach`  | **After every** test                      |
+| `afterAll`   | **Once after** all tests                  |
+
+### ✅ When to Use Which?
+
+| Hook         | Use Case Example                        |
+| ------------ | --------------------------------------- |
+| `beforeAll`  | Connect to database, start server       |
+| `beforeEach` | Reset mocks, clean up DOM, fresh state  |
+| `afterEach`  | Clean up temp files, reset localStorage |
+| `afterAll`   | Close DB/server, clean global setup     |
